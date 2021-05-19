@@ -1,0 +1,33 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: freddegier
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        env:
+          IMAGE_NAME: freddegier/gitlab-auto-semver
+        run: |
+          export TAG=$(date +%s)
+
+          docker build . -t $IMAGE_NAME:$TAG
+          docker tag $IMAGE_NAME:$TAG $IMAGE_NAME:latest
+          docker push $IMAGE_NAME -a
