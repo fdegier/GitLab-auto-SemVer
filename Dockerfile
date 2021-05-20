@@ -7,8 +7,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 WORKDIR /app
 
-COPY main.py .
+COPY app/ .
 RUN chmod +x main.py && ln -s /app/main.py /app/auto-semver
 ENV PATH="$PATH:/app"
 
-CMD ["python", "auto-semver.py"]
+CMD ["auto-semver"]
