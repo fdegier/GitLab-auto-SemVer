@@ -26,7 +26,7 @@ jobs:
         env:
           IMAGE_NAME: freddegier/gitlab-auto-semver
         run: |
-          export TAG=$(date +%s)
+          export TAG=${GITHUB_REF##*/}
 
           docker build . -t $IMAGE_NAME:$TAG
           docker tag $IMAGE_NAME:$TAG $IMAGE_NAME:latest
