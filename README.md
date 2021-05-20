@@ -7,6 +7,13 @@ designed to work with GitLab, it can be quite easily extended to also work with 
 In order to make this work you need a user that has access to your repository and have it's SSH private key in a 
 environment variable, as well as the public key added to its account.
 
+## Automatically?
+Bumping the `patch` version is quite simple, however how could we decide to bump the `minor` or `major`? Quite frankly
+it would be quite difficult to guess it based on the code changes, it would be a cool project for another day though!
+
+For now the only way to automatically bump the version is to include a keyword in the last commit message. The options
+are to use `#major` to bump the major and `#minor` to bump minor. This keyword can be anywhere in the last commit 
+message.
 
 ## Example .gitlab-ci.yml
 Below is an example of using it in GitLab CI. First we inject the SSH key of the user with sufficient rights to push to
@@ -37,3 +44,7 @@ deploy:
   rules:
     - if: $CI_COMMIT_TAG
 ```
+
+## Inspiration
+I was inspired by this article to create this tool. [https://threedots.tech/post/automatic-semantic-versioning-in-gitlab-ci/](https://threedots.tech/post/automatic-semantic-versioning-in-gitlab-ci/)
+
