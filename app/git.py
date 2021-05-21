@@ -69,7 +69,7 @@ class Git:
         :return: Last commit message
         """
         msg = self._execute_cmd(cmd="git show -s --format=%s", output=True)
-        if not msfg:
+        if not msg:
             raise ValueError("No commit messages are available")
         return msg
 
