@@ -4,6 +4,7 @@ WORKDIR /setup
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+RUN apt -yqq update && apt -yqq install git-lfs
 
 WORKDIR /app
 
