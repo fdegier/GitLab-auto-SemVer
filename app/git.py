@@ -25,7 +25,7 @@ class Git:
             try:
                 a = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT).decode().strip()
                 print(a)
-                return subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT).decode().strip()
+                return a
             except subprocess.CalledProcessError as E:
                 print(f"Error: {E}")
                 return False
